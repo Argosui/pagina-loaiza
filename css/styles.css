@@ -463,13 +463,12 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .retrato::before { left: 0; border-left: var(--l) solid; border-color: var(--l-izq); }
 .retrato::after { right: 0; border-right: var(--l) solid; border-color: var(--cobre); }
 
-/* ---------- Caso de impacto: la cifra entra en la foto ---------- */
+/* ---------- Caso de impacto ---------- */
 
 .caso-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
 .caso .gran-cifra {
   position: relative;
   z-index: 3;
-  margin-left: calc(clamp(56px, 8vw, 118px) * -1);
   font-family: var(--f-marca);
   font-weight: 700;
   font-size: clamp(96px, 13vw, 184px);
