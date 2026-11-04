@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contáctame · Alejandro Loaiza · Estratega Hotelero</title>
-  <meta name="description" content="El primer paso es una conversación. Escríbale al Sr. Loaiza por WhatsApp, Instagram o LinkedIn.">
-  <meta property="og:title" content="Contáctame · Alejandro Loaiza · Estratega Hotelero">
+  <title>Conversemos · Alejandro Loaiza · Estratega Hotelero</title>
+  <meta name="description" content="Conversemos. Cuéntale al Sr. Loaiza qué deseas resolver en tu hotel.">
+  <meta property="og:title" content="Conversemos · Alejandro Loaiza · Estratega Hotelero">
   <meta property="og:description" content="Operación, finanzas y estrategia bajo una misma visión.">
   <meta property="og:url" content="https://www.estrategahotelero.com/contacto.html">
   <meta name="theme-color" content="#25282A">
@@ -41,7 +41,7 @@
       <a href="index.html">Inicio</a>
       <a href="sobre-mi.html">Sobre mí</a>
       <a href="servicios.html">Servicios</a>
-      <a href="contacto.html" aria-current="page">Contáctame</a>
+      <a href="contacto.html" aria-current="page">Conversemos</a>
       <a href="contacto.html" class="btn">Escríbeme</a>
     </nav>
     <div class="header-redes">
@@ -53,53 +53,36 @@
 
 <main>
 
-  <!-- HOME -->
-  <section class="hero hero--interna">
-    <img class="hero-foto" src="img/web/hero-contacto.webp" alt="Alejandro Loaiza Aponte, Estratega Hotelero" fetchpriority="high">
-    <div class="contenedor">
-      <h1 class="revelar">El primer paso es <em>una conversación.</em></h1>
-      <p class="apertura revelar retraso-1">Sin fórmulas, sin promesas genéricas.<br>Solo para saber si el problema que tiene su hotel<br>es el que el Sr. Loaiza sabe resolver.</p>
-    </div>
-  </section>
-
-  <!-- FORMAS DE CONTACTO -->
-  <section class="seccion">
-    <div class="contenedor">
-      <div class="cabecera-seccion">
-        <h2 class="titulo subrayado">Escríbame por donde prefiera</h2>
+  <!-- CONVERSEMOS -->
+  <section class="seccion oscuro conversemos">
+    <div class="contenedor conversemos-grid">
+      <figure class="retrato">
+        <img src="img/web/hero-contacto.webp" alt="Alejandro Loaiza Aponte, Estratega Hotelero" fetchpriority="high">
+      </figure>
+      <div>
+        <h1 class="titulo subrayado">Conversemos</h1>
+        <form class="formulario" data-form-contacto novalidate>
+          <div class="campo">
+            <label for="f-nombre">Nombre</label>
+            <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="f-correo">Correo</label>
+            <input id="f-correo" name="correo" type="email" autocomplete="email" inputmode="email" required>
+          </div>
+          <div class="campo">
+            <label for="f-celular">Celular</label>
+            <input id="f-celular" name="celular" type="tel" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="campo">
+            <label for="f-mensaje">¿Qué deseas resolver en tu hotel?</label>
+            <textarea id="f-mensaje" name="mensaje" rows="5" required></textarea>
+          </div>
+          <p class="form-error" role="alert" hidden>Por favor completa todos los campos con un correo válido.</p>
+          <button type="submit" class="btn">Enviar</button>
+          <p class="form-nota">Al enviar se abre WhatsApp con tu mensaje listo.</p>
+        </form>
       </div>
-      <div class="contactos">
-        <article class="contacto destacado">
-          <span class="icono"><svg><use href="#i-wa"/></svg></span>
-          <h3>WhatsApp</h3>
-          <p class="detalle">La forma más directa</p>
-          <p class="dato" data-wa-numero>Respuesta directa del Sr. Loaiza.</p>
-          <a data-wa="general" href="#" class="btn">Escribir por WhatsApp</a>
-        </article>
-        <article class="contacto">
-          <span class="icono"><svg><use href="#i-ig"/></svg></span>
-          <h3>Instagram</h3>
-          <p class="detalle">Mensaje directo</p>
-          <p class="dato">@elestrategahotelero</p>
-          <a href="https://instagram.com/elestrategahotelero" target="_blank" rel="noopener" class="btn btn-linea">Ir a Instagram</a>
-        </article>
-        <article class="contacto">
-          <span class="icono"><svg><use href="#i-in"/></svg></span>
-          <h3>LinkedIn</h3>
-          <p class="detalle">Para propuestas formales de consultoría y conferencias</p>
-          <p class="dato">Alejandro Loaiza Aponte</p>
-          <a data-linkedin href="#" class="btn btn-linea">Ir a LinkedIn</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CIERRE -->
-  <section class="seccion oscuro cta-final">
-    <div class="contenedor">
-      <svg class="iso"><use href="#iso"/></svg>
-      <blockquote class="cita-grande">“La hotelería no solo se opera: se dirige con estrategia.”</blockquote>
-      <p class="firma">Alejandro Loaiza · Estratega Hotelero</p>
     </div>
   </section>
 
@@ -122,7 +105,7 @@
           <li><a href="index.html">Inicio</a></li>
           <li><a href="sobre-mi.html">Sobre mí</a></li>
           <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="contacto.html">Contáctame</a></li>
+          <li><a href="contacto.html">Conversemos</a></li>
         </ul>
       </div>
       <div>

@@ -122,6 +122,30 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", marcar, { passive: true });
   }
 
+  // Formulario "Conversemos": valida y abre WhatsApp con los datos escritos
+  const form = document.querySelector("[data-form-contacto]");
+  if (form) {
+    const aviso = form.querySelector(".form-error");
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      let valido = true;
+      form.querySelectorAll("input, textarea").forEach((campo) => {
+        campo.value = campo.value.trim();
+        const ok = campo.checkValidity();
+        campo.setAttribute("aria-invalid", ok ? "false" : "true");
+        if (!ok && valido) { campo.focus(); valido = false; }
+      });
+      aviso.hidden = valido;
+      if (!valido) return;
+      const d = Object.fromEntries(new FormData(form));
+      const texto =
+        `Hola Sr. Loaiza, conversemos.\n\n` +
+        `Nombre: ${d.nombre}\nCorreo: ${d.correo}\nCelular: ${d.celular}\n\n` +
+        `¿Qué deseo resolver en mi hotel?\n${d.mensaje}`;
+      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
+    });
+  }
+
   const anio = document.querySelector("[data-anio]");
   if (anio) anio.textContent = new Date().getFullYear();
 });
