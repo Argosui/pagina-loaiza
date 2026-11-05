@@ -332,7 +332,13 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   mask-composite: intersect;
 }
 /* Retrato vertical (Servicios): caja más angosta para que se vea el torso y no solo la cabeza */
-.hero-foto--retrato { width: min(34%, 500px); object-position: center 12%; }
+.hero-foto--retrato {
+  right: clamp(0px, 9vw, 160px);
+  width: min(34%, 500px);
+  object-position: center 12%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 28%, #000 78%, transparent 100%), linear-gradient(180deg, transparent 0, #000 56px);
+  mask-image: linear-gradient(90deg, transparent 0, #000 28%, #000 78%, transparent 100%), linear-gradient(180deg, transparent 0, #000 56px);
+}
 @media (max-width: 900px) {
   .hero-foto {
     top: 0;
@@ -343,6 +349,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
     mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
     -webkit-mask-composite: source-over;
     mask-composite: add;
+    right: 0;
   }
 }
 
@@ -395,6 +402,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .numero .cifra small { font-size: .36em; letter-spacing: .04em; vertical-align: 1em; margin-right: 3px; }
 .numero .cifra small.moneda { vertical-align: baseline; margin: 0 0 0 6px; letter-spacing: .08em; }
 .numero p { margin: 10px 0 0; font-size: 14.5px; font-weight: 600; line-height: 1.4; max-width: 24ch; }
+/* 30, 5 y 7: cifra y texto centrados en su caja */
+.numero:not([data-contar="60"]) { text-align: center; }
+.numero:not([data-contar="60"]) p { margin-left: auto; margin-right: auto; }
 
 @media (max-width: 860px) {
   .numeros .grid { grid-template-columns: 1fr 1fr; }
@@ -524,10 +534,11 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .frase img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; border-bottom: 5px solid var(--cobre); }
 .frase blockquote {
   margin: 18px 0 0;
-  font-family: var(--f-voz);
+  font-family: var(--f-cuerpo);
   font-style: normal;
-  font-size: clamp(21px, 1.9vw, 26px);
-  line-height: 1.32;
+  font-weight: 300;
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.5;
 }
 .frases .firma { margin-top: clamp(28px, 3.4vw, 44px); }
 @media (max-width: 860px) {
@@ -678,7 +689,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .ego-texto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
 .ego-texto .apertura { color: var(--cobre-claro); margin: 12px 0 0; }
 .ego--solo { padding-top: var(--seccion); }
-.ego-cita .cita-grande { max-width: 760px; }
+.ego-cita .cita-grande { max-width: none; font-size: clamp(20px, 2.5vw, 34px); }
+@media (min-width: 700px) { .ego-cita .cita-grande { white-space: nowrap; } }
 
 @media (max-width: 760px) {
   .ego-orden { grid-template-columns: 1fr; }
