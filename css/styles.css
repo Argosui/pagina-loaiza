@@ -91,7 +91,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 .apertura {
   font-family: var(--f-voz);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: clamp(21px, 2vw, 26px);
   line-height: 1.42;
@@ -102,7 +102,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 .cita-grande {
   font-family: var(--f-voz);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: clamp(27px, 3.5vw, 46px);
   line-height: 1.26;
@@ -119,6 +119,19 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   text-transform: uppercase;
   color: var(--cobre-claro);
 }
+.frases .firma, .ego-cita .firma { text-align: right; }
+
+/* Línea pequeña sobre un título, en cobre */
+.antetitulo {
+  margin: 0 0 10px;
+  font-family: var(--f-marca);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cobre);
+}
+.oscuro .antetitulo { color: var(--cobre-claro); }
 
 /* ---------- Secciones ---------- */
 
@@ -318,6 +331,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
+/* Retrato vertical (Servicios): caja más angosta para que se vea el torso y no solo la cabeza */
+.hero-foto--retrato { width: min(34%, 500px); object-position: center 12%; }
 @media (max-width: 900px) {
   .hero-foto {
     top: 0;
@@ -343,6 +358,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .hero h1 em { font-style: normal; color: var(--cobre-claro); }
 .hero--interna h1 { font-size: clamp(30px, 3.9vw, 52px); max-width: 19ch; }
 .hero--frase h1 { font-size: clamp(28px, 3.3vw, 46px); max-width: 22ch; line-height: 1.14; }
+.hero h1 .linea { display: block; }
+.hero--frase h1:has(.linea) { max-width: none; }
 .hero .apertura { margin: 22px 0 0; max-width: 40ch; color: var(--marfil); }
 .hero .apoyo {
   margin: 16px 0 0;
@@ -390,7 +407,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .tesis .contenedor { display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 28px); }
 .comillas {
   font-family: var(--f-voz);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(90px, 11vw, 170px);
   line-height: .8;
   color: var(--cobre);
@@ -480,13 +497,13 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 }
 .caso .gran-cifra span { font-size: .48em; vertical-align: .72em; color: var(--cobre-claro); }
 .caso h2 { font-family: var(--f-marca); font-weight: 700; font-size: clamp(21px, 2.2vw, 28px); line-height: 1.22; letter-spacing: .04em; margin: 14px 0 18px; }
-.caso h2 em { display: block; font-family: var(--f-voz); font-weight: 400; font-style: italic; letter-spacing: 0; color: var(--cobre-claro); font-size: 1.14em; margin-top: 4px; }
+.caso h2 em { display: block; font-family: var(--f-voz); font-weight: 400; font-style: normal; letter-spacing: 0; color: var(--cobre-claro); font-size: 1.14em; margin-top: 4px; }
 .caso .cierre {
   margin: 20px 0 0;
   padding-left: 18px;
   border-left: 3px solid var(--cobre);
   font-family: var(--f-voz);
-  font-style: italic;
+  font-style: normal;
   font-size: 23px;
   line-height: 1.34;
 }
@@ -498,7 +515,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 /* ---------- Propuesta: texto centrado ---------- */
 
 .intro { padding: clamp(40px, 5vw, 72px) 0 var(--seccion); }
-.intro .apertura { max-width: 34em; margin: 0 auto; text-align: center; }
+.intro .apertura { max-width: 34em; margin: 0 auto; text-align: center; text-wrap: balance; }
 
 /* ---------- Frases: tres fotos, una frase cada una ---------- */
 
@@ -508,7 +525,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .frase blockquote {
   margin: 18px 0 0;
   font-family: var(--f-voz);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(21px, 1.9vw, 26px);
   line-height: 1.32;
 }
@@ -564,7 +581,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   .split-foto { min-height: 0; aspect-ratio: 3 / 2; }
 }
 
-.paises-linea { font-family: var(--f-voz); font-style: italic; font-size: 24px; font-weight: 500; margin: 14px 0; }
+.paises-linea { font-family: var(--f-voz); font-style: normal; font-size: 24px; font-weight: 500; margin: 14px 0; }
 
 /* ---------- Trayectoria ---------- */
 
@@ -661,7 +678,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .ego-texto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
 .ego-texto .apertura { color: var(--cobre-claro); margin: 12px 0 0; }
 .ego--solo { padding-top: var(--seccion); }
-.ego-cita { max-width: 760px; }
+.ego-cita .cita-grande { max-width: 760px; }
 
 @media (max-width: 760px) {
   .ego-orden { grid-template-columns: 1fr; }
@@ -714,7 +731,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .situacion { border-top: 3px solid var(--carbon); padding-top: 14px; font-size: 15.5px; color: var(--texto-suave); }
 @media (max-width: 900px) { .situaciones { grid-template-columns: 1fr; gap: 20px; } }
 
-.remate { margin: clamp(20px, 2.4vw, 28px) 0 0; font-family: var(--f-voz); font-style: italic; font-weight: 500; font-size: clamp(21px, 2vw, 25px); line-height: 1.36; max-width: 60ch; }
+.remate { margin: clamp(20px, 2.4vw, 28px) 0 0; font-family: var(--f-voz); font-style: normal; font-weight: 500; font-size: clamp(21px, 2vw, 25px); line-height: 1.36; max-width: 60ch; }
 
 /* ---------- Servicios de consultoría ---------- */
 
@@ -724,7 +741,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   border-top: 1px solid var(--linea-clara);
 }
 .oferta:first-child { border-top: 0; padding-top: 0; }
-.oferta-num { font-family: var(--f-marca); font-weight: 900; font-size: clamp(54px, 6vw, 84px); line-height: .95; color: var(--cobre); }
+.oferta-num { font-family: var(--f-marca); font-weight: 700; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.1; letter-spacing: .12em; text-transform: uppercase; color: var(--cobre); }
+.btn-cotizar { margin-top: 20px; }
+.oferta.integral .btn-cotizar:hover { background: var(--marfil); border-color: var(--marfil); color: var(--carbon); }
 .oferta h3 { font-family: var(--f-marca); font-weight: 700; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.16; letter-spacing: .03em; margin: 8px 0 8px; }
 .sello { display: block; margin-bottom: 14px; color: var(--cobre-claro); font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
 .oferta .cuerpo { font-size: 15.5px; margin: 0; }
@@ -779,6 +798,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 /* Diagrama: dos círculos llenos; el punto es la intersección del isotipo */
 .diagrama-dual { width: 100%; max-width: 520px; margin-bottom: 24px; }
 .diagrama-dual text { font-family: var(--f-marca); font-weight: 700; letter-spacing: .14em; font-size: 12px; }
+.diagrama-dual .dual-izq { letter-spacing: .06em; font-size: 11.5px; }
 
 /* ---------- Conferencias ---------- */
 
@@ -803,7 +823,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .contacto.destacado .icono svg { width: 44px; height: 44px; }
 .contacto h3 { font-family: var(--f-marca); font-weight: 700; font-size: 20px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.2; }
 .contacto.destacado h3 { font-size: clamp(30px, 4vw, 52px); }
-.contacto .detalle { font-family: var(--f-voz); font-style: italic; font-weight: 500; font-size: 20px; line-height: 1.3; margin: 2px 0 6px; }
+.contacto .detalle { font-family: var(--f-voz); font-style: normal; font-weight: 500; font-size: 20px; line-height: 1.3; margin: 2px 0 6px; }
 .contacto.destacado .detalle { font-size: clamp(22px, 2.4vw, 30px); color: var(--cobre-claro); }
 .contacto .dato { font-size: 15px; color: var(--texto-suave); margin-bottom: 12px; word-break: break-word; }
 .contacto.destacado .dato { color: var(--marfil-suave); }
@@ -822,6 +842,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .conversemos { padding-top: calc(var(--header-h) + var(--seccion) * .6); }
 .conversemos-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
 .conversemos .titulo { font-size: clamp(32px, 4.4vw, 58px); }
+.conversemos .subtitulo { margin: 18px 0 0; font-family: var(--f-voz); font-size: clamp(22px, 2.2vw, 28px); line-height: 1.3; color: var(--cobre-claro); }
 .formulario { margin-top: clamp(22px, 3vw, 36px); display: grid; gap: 22px; }
 .campo label {
   display: block; margin-bottom: 6px;
@@ -853,7 +874,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 .footer { background: var(--carbon); color: var(--marfil); padding: 44px 0 22px; border-top: 1px solid var(--linea-oscura); }
 .footer .grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 28px; padding-bottom: 28px; }
-.footer .lema { font-family: var(--f-voz); font-style: italic; font-size: 20px; line-height: 1.3; color: var(--marfil-suave); margin: 14px 0 0; max-width: 30ch; }
+.footer .lema { font-family: var(--f-voz); font-style: normal; font-size: 20px; line-height: 1.3; color: var(--marfil-suave); margin: 14px 0 0; white-space: nowrap; }
+@media (max-width: 560px) { .footer .lema { white-space: normal; } }
 .footer h4 { font-family: var(--f-marca); font-weight: 600; font-size: 12px; letter-spacing: .22em; color: var(--cobre-claro); margin-bottom: 10px; text-transform: uppercase; }
 .footer ul { list-style: none; padding: 0; margin: 0; }
 .footer li { margin-bottom: 4px; }

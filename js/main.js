@@ -13,6 +13,9 @@ const LINKEDIN_URL = "https://www.linkedin.com/";
 const MENSAJES_WA = {
   general: "Hola Sr. Loaiza, quiero agendar una conversación.",
   consultoria: "Hola Sr. Loaiza, me interesa hablar de una consultoría.",
+  servicio1: "Hola Sr. Loaiza, quiero cotizar el servicio El Costo Oculto.",
+  servicio2: "Hola Sr. Loaiza, quiero cotizar el servicio Análisis de Ingresos y Rentabilidad.",
+  servicio3: "Hola Sr. Loaiza, quiero cotizar el servicio Diagnóstico del Ciclo Completo.",
   formacion: "Hola Sr. Loaiza, me interesa la formación de directivos.",
   conferencias: "Hola Sr. Loaiza, quiero solicitar una propuesta para mi evento."
 };
