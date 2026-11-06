@@ -91,23 +91,66 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(paso);
   }
 
-  // Carrusel de frases
-  const carrusel = document.querySelector(".carrusel");
+  // Carrusel de fotos (Sobre mí): avanza solo cada 5 s, con flechas y puntos.
+  // Muestra 3 fotos por vista en escritorio y 1 en móvil (lo define el CSS).
+  const carrusel = document.querySelector(".carrusel-fotos");
   if (carrusel) {
-    const frases = [...carrusel.querySelectorAll(".frase")];
-    const puntos = [...document.querySelectorAll(".puntos button")];
+    const pista = carrusel.querySelector(".carrusel-pista");
+    const slides = [...pista.children];
+    const contPuntos = document.querySelector(".carrusel-puntos");
     let actual = 0;
     let temporizador;
+    const porVista = () => Math.max(1, Math.round(pista.clientWidth / slides[0].getBoundingClientRect().width));
+    const paginas = () => Math.ceil(slides.length / porVista());
+
+    const pintarPuntos = () => {
+      contPuntos.innerHTML = "";
+      for (let i = 0; i < paginas(); i++) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", `Ir al grupo de fotos ${i + 1}`);
+        b.addEventListener("click", () => { mostrar(i); reiniciar(); });
+        contPuntos.appendChild(b);
+      }
+    };
     const mostrar = (i) => {
-      actual = (i + frases.length) % frases.length;
-      frases.forEach((f, j) => f.classList.toggle("activa", j === actual));
-      puntos.forEach((p, j) => p.setAttribute("aria-selected", j === actual));
+      const total = paginas();
+      actual = (i + total) % total;
+      const primera = Math.min(actual * porVista(), slides.length - porVista());
+      pista.style.transform = `translateX(${-slides[primera].offsetLeft}px)`;
+      [...contPuntos.children].forEach((p, j) => p.setAttribute("aria-current", j === actual));
     };
     const reiniciar = () => {
       clearInterval(temporizador);
-      temporizador = setInterval(() => mostrar(actual + 1), 7000);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      temporizador = setInterval(() => mostrar(actual + 1), 5000);
     };
-    puntos.forEach((p, j) => p.addEventListener("click", () => { mostrar(j); reiniciar(); }));
+
+    carrusel.querySelector(".anterior").addEventListener("click", () => { mostrar(actual - 1); reiniciar(); });
+    carrusel.querySelector(".siguiente").addEventListener("click", () => { mostrar(actual + 1); reiniciar(); });
+    carrusel.addEventListener("mouseenter", () => clearInterval(temporizador));
+    carrusel.addEventListener("mouseleave", reiniciar);
+
+    // Deslizar con el dedo en móvil
+    let x0 = null;
+    pista.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    pista.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) { mostrar(actual + (dx < 0 ? 1 : -1)); reiniciar(); }
+      x0 = null;
+    });
+
+    let ancho = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth === ancho) return;
+      ancho = window.innerWidth;
+      pintarPuntos();
+      mostrar(Math.min(actual, paginas() - 1));
+    });
+
+    pintarPuntos();
+    mostrar(0);
     reiniciar();
   }
 
@@ -143,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const d = Object.fromEntries(new FormData(form));
       const texto =
         `Hola Sr. Loaiza, conversemos.\n\n` +
-        `Nombre: ${d.nombre}\nCorreo: ${d.correo}\nCelular: ${d.celular}\n\n` +
+        `Nombre: ${d.nombre}\nEmpresa: ${d.empresa}\nCorreo: ${d.correo}\nCelular: ${d.celular}\n\n` +
         `¿Qué deseo resolver en mi hotel?\n${d.mensaje}`;
       window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
     });

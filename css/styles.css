@@ -50,6 +50,9 @@ p { margin: 0 0 1em; }
 h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 :focus-visible { outline: 2px solid var(--cobre-claro); outline-offset: 3px; }
 
+/* Oculto temporalmente; se quita la clase para volver a mostrarlo */
+.oculto { display: none !important; }
+
 .contenedor {
   width: 100%;
   max-width: var(--ancho);
@@ -317,33 +320,47 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 }
 .hero--interna { min-height: min(78svh, 620px); padding-bottom: 48px; }
 
-/* Foto del hero: a la derecha y bajo el header, fundida con el carbón hacia el texto y hacia arriba */
+/* Foto del hero: ocupa toda la altura de la sección y conserva su proporción (no se recorta),
+   fundida con el carbón hacia el texto y hacia arriba */
 .hero-foto {
   position: absolute;
-  top: var(--header-h);
+  top: 0;
   right: 0;
-  width: min(46%, 760px);
-  height: calc(100% - var(--header-h));
-  object-fit: cover;
-  object-position: center top;
+  width: auto;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+  object-position: right top;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 30%), linear-gradient(180deg, transparent 0, #000 56px);
   mask-image: linear-gradient(90deg, transparent 0, #000 30%), linear-gradient(180deg, transparent 0, #000 56px);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
-/* Retrato vertical (Servicios): caja más angosta para que se vea el torso y no solo la cabeza */
-.hero-foto--retrato {
-  right: clamp(0px, 9vw, 160px);
-  width: min(34%, 500px);
-  object-position: center 12%;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 28%, #000 78%, transparent 100%), linear-gradient(180deg, transparent 0, #000 56px);
-  mask-image: linear-gradient(90deg, transparent 0, #000 28%, #000 78%, transparent 100%), linear-gradient(180deg, transparent 0, #000 56px);
+/* Servicios: título centrado y grande; la foto completa pegada a la derecha */
+.hero--servicios { min-height: min(86svh, 720px); }
+/* El título se centra en la mitad izquierda; la foto ocupa la derecha */
+.hero--servicios .contenedor { display: grid; grid-template-columns: 1fr 1fr; text-align: center; }
+@media (max-width: 900px) { .hero--servicios .contenedor { grid-template-columns: 1fr; } }
+.hero.hero--servicios h1 {
+  max-width: none;
+  margin: 0 auto;
+  font-size: clamp(44px, 7vw, 104px);
+  letter-spacing: .08em;
+}
+.hero--servicios h1::after {
+  content: "";
+  display: block;
+  width: 72px; height: 3px;
+  margin: 22px auto 0;
+  background: var(--cobre);
 }
 @media (max-width: 900px) {
   .hero-foto {
     top: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center top;
     opacity: .3;
     -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
@@ -380,11 +397,11 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 /* ---------- Números: panel de marfil que cabalga sobre el hero ---------- */
 
 /* El fondo deja ver el hero detrás de la parte del panel que sube (84px) y es crema debajo */
-.numeros { position: relative; z-index: 2; background: linear-gradient(transparent 84px, var(--crema) 84px); }
+.numeros { position: relative; z-index: 2; background: linear-gradient(transparent 32px, var(--crema) 32px); }
 .numeros .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: -84px;
+  margin-top: -32px;
   background: var(--marfil);
   color: var(--carbon);
   box-shadow: var(--sombra);
@@ -465,6 +482,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 .retrato {
   --l: 12px;
+  --aire: clamp(10px, 1.4vw, 16px); /* espacio entre la foto y las L del isotipo */
   --l-izq: var(--carbon);
   position: relative;
   aspect-ratio: 4 / 5;
@@ -475,9 +493,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .retrato img {
   position: absolute;
   top: 0;
-  left: var(--l);
-  width: calc(100% - var(--l) * 2);
-  height: calc(100% - var(--l));
+  left: calc(var(--l) + var(--aire));
+  width: calc(100% - (var(--l) + var(--aire)) * 2);
+  height: calc(100% - var(--l) - var(--aire) * 1.6);
   object-fit: cover;
   object-position: center top;
 }
@@ -486,7 +504,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   position: absolute;
   bottom: 0;
   width: 46%;
-  height: 52%;
+  height: 56%;
   border-bottom: var(--l) solid;
   pointer-events: none;
 }
@@ -527,13 +545,39 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .intro { padding: clamp(40px, 5vw, 72px) 0 var(--seccion); }
 .intro .apertura { max-width: 34em; margin: 0 auto; text-align: center; text-wrap: balance; }
 
-/* ---------- Frases: tres fotos, una frase cada una ---------- */
+/* ---------- Frases: carrusel de fotos y tres frases ---------- */
+
+.carrusel-fotos { position: relative; overflow: hidden; --por-vista: 3; --espacio: clamp(12px, 1.6vw, 20px); }
+.carrusel-pista {
+  position: relative;
+  list-style: none; margin: 0; padding: 0;
+  display: flex; gap: var(--espacio);
+  transition: transform .7s ease;
+}
+.slide { flex: 0 0 calc((100% - var(--espacio) * (var(--por-vista) - 1)) / var(--por-vista)); }
+.slide img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center; border-bottom: 5px solid var(--cobre); background: var(--carbon-2); }
+.carrusel-flecha {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; display: grid; place-items: center;
+  background: rgba(37, 40, 42, .78); color: var(--marfil);
+  border: 1px solid var(--linea-oscura); cursor: pointer;
+  transition: background .25s;
+}
+.carrusel-flecha:hover { background: var(--cobre); }
+.carrusel-flecha svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; }
+.carrusel-flecha.anterior { left: 10px; }
+.carrusel-flecha.siguiente { right: 10px; }
+.carrusel-puntos { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 20px 0 clamp(28px, 3.4vw, 44px); }
+.carrusel-puntos button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 1px solid var(--cobre-claro); background: transparent; cursor: pointer; transition: background .25s; }
+.carrusel-puntos button[aria-current="true"] { background: var(--cobre-claro); }
+@media (max-width: 860px) { .carrusel-fotos { --por-vista: 1; max-width: 460px; margin: 0 auto; } }
+@media (prefers-reduced-motion: reduce) { .carrusel-pista { transition: none; } }
 
 .frases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.6vw, 36px); }
-.frase { margin: 0; display: flex; flex-direction: column; }
-.frase img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; border-bottom: 5px solid var(--cobre); }
-.frase blockquote {
-  margin: 18px 0 0;
+.frase {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 3px solid var(--cobre);
   font-family: var(--f-cuerpo);
   font-style: normal;
   font-weight: 300;
@@ -542,7 +586,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 }
 .frases .firma { margin-top: clamp(28px, 3.4vw, 44px); }
 @media (max-width: 860px) {
-  .frases-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; gap: 40px; }
+  .frases-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; gap: 24px; }
 }
 
 /* ---------- Botón de WhatsApp ---------- */
@@ -747,12 +791,15 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 /* ---------- Servicios de consultoría ---------- */
 
+/* Cada servicio es una tarjeta independiente */
 .oferta {
   display: grid; grid-template-columns: 5fr 7fr; gap: clamp(20px, 3.4vw, 48px);
-  padding: clamp(32px, 3.8vw, 48px) 0;
-  border-top: 1px solid var(--linea-clara);
+  padding: clamp(28px, 3.4vw, 44px);
+  background: #fff;
+  border-top: 5px solid var(--cobre);
+  box-shadow: 0 18px 40px -26px rgba(37, 40, 42, .55);
 }
-.oferta:first-child { border-top: 0; padding-top: 0; }
+.oferta + .oferta { margin-top: clamp(20px, 2.6vw, 32px); }
 .oferta-num { font-family: var(--f-marca); font-weight: 700; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.1; letter-spacing: .12em; text-transform: uppercase; color: var(--cobre); }
 .btn-cotizar { margin-top: 20px; }
 .oferta.integral .btn-cotizar:hover { background: var(--marfil); border-color: var(--marfil); color: var(--carbon); }
@@ -768,8 +815,6 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 /* El servicio integral se distingue: es el más completo */
 .oferta.integral {
-  margin-top: clamp(8px, 1.4vw, 16px);
-  padding: clamp(28px, 3.4vw, 44px);
   background: var(--carbon);
   color: var(--marfil);
   border-top: 5px solid var(--cobre);
@@ -782,8 +827,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .oferta.integral .oferta-resultado strong { color: var(--cobre-claro); }
 @media (max-width: 860px) { .oferta { grid-template-columns: 1fr; } }
 
-.oferta-cierre { margin-top: clamp(28px, 3.4vw, 44px); }
-.oferta-cierre .remate { margin-top: 8px; }
+.oferta-cierre { margin: clamp(32px, 4vw, 52px) auto 0; text-align: center; text-wrap: balance; }
 
 /* ---------- Lo que instala ---------- */
 
@@ -853,6 +897,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 
 .conversemos { padding-top: calc(var(--header-h) + var(--seccion) * .6); }
 .conversemos-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
+.conversemos .retrato { aspect-ratio: 2 / 3; }
 .conversemos .titulo { font-size: clamp(32px, 4.4vw, 58px); }
 .conversemos .subtitulo { margin: 18px 0 0; font-family: var(--f-voz); font-size: clamp(22px, 2.2vw, 28px); line-height: 1.3; color: var(--cobre-claro); }
 .formulario { margin-top: clamp(22px, 3vw, 36px); display: grid; gap: 22px; }
@@ -876,7 +921,6 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .campo [aria-invalid="true"] { border-bottom-color: #E07A5F; }
 .formulario .btn { justify-self: start; }
 .form-error { margin: 0; color: #F0A58F; font-size: 14.5px; }
-.form-nota { margin: -8px 0 0; font-size: 13px; color: var(--marfil-suave); }
 @media (max-width: 860px) {
   .conversemos-grid { grid-template-columns: 1fr; }
   .conversemos .retrato { max-width: 420px; }

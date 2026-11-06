@@ -27,6 +27,7 @@
   <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></symbol>
   <symbol id="i-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10.5V17M12 17v-6.5M12 13.8a2.8 2.8 0 0 1 5.6 0V17"/><circle cx="8" cy="7.4" r=".6" fill="currentColor"/></symbol>
   <symbol id="i-tt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3c.4 2.6 2.3 4.5 5 4.8"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/></symbol>
   <symbol id="f-ve" viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#FFCC00"/><rect y="6.67" width="30" height="6.67" fill="#00247D"/><rect y="13.33" width="30" height="6.67" fill="#CF142B"/><g fill="#fff"><circle cx="10.87" cy="13.10" r=".6"/><circle cx="11.63" cy="11.77" r=".6"/><circle cx="12.80" cy="10.79" r=".6"/><circle cx="14.24" cy="10.27" r=".6"/><circle cx="15.76" cy="10.27" r=".6"/><circle cx="17.20" cy="10.79" r=".6"/><circle cx="18.37" cy="11.77" r=".6"/><circle cx="19.13" cy="13.10" r=".6"/></g></symbol>
   <symbol id="f-mx" viewBox="0 0 30 20"><rect width="10" height="20" fill="#006847"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/><circle cx="15" cy="10" r="2.6" fill="#8C6A2F"/><path d="M12.4 11.6q2.6 2.2 5.2 0" fill="none" stroke="#006847" stroke-width=".7"/></symbol>
   <symbol id="f-us" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><g fill="#B22234"><rect y="0.000" width="30" height="1.538"/><rect y="3.077" width="30" height="1.538"/><rect y="6.154" width="30" height="1.538"/><rect y="9.231" width="30" height="1.538"/><rect y="12.308" width="30" height="1.538"/><rect y="15.385" width="30" height="1.538"/><rect y="18.462" width="30" height="1.538"/></g><rect width="12" height="10.77" fill="#3C3B6E"/><g fill="#fff"><circle cx="1.5" cy="1.5" r=".45"/><circle cx="3.8" cy="1.5" r=".45"/><circle cx="6.0" cy="1.5" r=".45"/><circle cx="8.2" cy="1.5" r=".45"/><circle cx="10.5" cy="1.5" r=".45"/><circle cx="1.5" cy="4.1" r=".45"/><circle cx="3.8" cy="4.1" r=".45"/><circle cx="6.0" cy="4.1" r=".45"/><circle cx="8.2" cy="4.1" r=".45"/><circle cx="10.5" cy="4.1" r=".45"/><circle cx="1.5" cy="6.7" r=".45"/><circle cx="3.8" cy="6.7" r=".45"/><circle cx="6.0" cy="6.7" r=".45"/><circle cx="8.2" cy="6.7" r=".45"/><circle cx="10.5" cy="6.7" r=".45"/><circle cx="1.5" cy="9.3" r=".45"/><circle cx="3.8" cy="9.3" r=".45"/><circle cx="6.0" cy="9.3" r=".45"/><circle cx="8.2" cy="9.3" r=".45"/><circle cx="10.5" cy="9.3" r=".45"/></g></symbol>
@@ -47,11 +48,11 @@
       <a href="sobre-mi.html" aria-current="page">Sobre mí</a>
       <a href="servicios.html">Servicios</a>
       <a href="contacto.html">Conversemos</a>
-      <a href="contacto.html" class="btn">Escríbeme</a>
+      <a href="contacto.html" class="btn oculto">Escríbeme</a>
     </nav>
     <div class="header-redes">
       <a href="https://instagram.com/elestrategahotelero" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
-      <a data-wa="general" href="#" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+      <a class="oculto" data-wa="general" href="#" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
     </div>
   </div>
 </header>
@@ -60,7 +61,7 @@
 
   <!-- HOME -->
   <section class="hero hero--interna hero--frase">
-    <img class="hero-foto" src="img/web/hero-contacto.webp" alt="Alejandro Loaiza Aponte, Estratega Hotelero" fetchpriority="high">
+    <img class="hero-foto" src="img/fotos-heros/foto-sobremi-hero.webp" alt="Alejandro Loaiza Aponte, Estratega Hotelero" fetchpriority="high">
     <div class="contenedor">
       <h1 class="revelar"><span class="linea">Un estratega que analiza desde</span> <span class="linea">la experiencia de la operación</span> <em class="linea">no desde el manual.</em></h1>
     </div>
@@ -85,7 +86,7 @@
     <div class="contenedor">
       <div class="cabecera-seccion">
         <h2 class="titulo subrayado">Tres décadas que construyeron el sistema</h2>
-        <p class="resumen-trayectoria">5 países · 7 grupos hoteleros · +10 marcas internacionales · 1995–2026</p>
+        <p class="resumen-trayectoria">5 países · 7 grupos hoteleros · +10 marcas internacionales · 1997–2026</p>
       </div>
       <ol class="linea-tiempo">
         <li class="etapa">
@@ -103,16 +104,8 @@
             </li>
             <li class="hotel">
               <span class="marca">Lidotel Hotels</span>
-              <span class="propiedad">Lidotel Hotel Boutique Valencia y Lidotel Hotel Boutique Barquisimeto</span>
-            </li>
-          </ul>
-        </li>
-        <li class="etapa">
-          <div class="etapa-pais"><span class="hito"></span><svg class="bandera" role="img" aria-label="Bandera de México"><use href="#f-mx"/></svg><h3>México</h3></div>
-          <ul class="hoteles">
-            <li class="hotel">
-              <span class="marca">Dreams</span>
-              <span class="grupo">by Hyatt</span>
+              <span class="propiedad">Lidotel Hotel Boutique Valencia</span>
+              <span class="propiedad">Lidotel Hotel Boutique Barquisimeto</span>
             </li>
           </ul>
         </li>
@@ -152,6 +145,14 @@
             <li class="hotel">
               <span class="marca">Planet Hollywood Beach Hotel and Resort Costa Rica</span>
               <span class="grupo">by Royalton Hotels and Resorts</span>
+            </li>
+          </ul>
+        </li>
+        <li class="etapa">
+          <div class="etapa-pais"><span class="hito"></span><svg class="bandera" role="img" aria-label="Bandera de México"><use href="#f-mx"/></svg><h3>México</h3></div>
+          <ul class="hoteles">
+            <li class="hotel">
+              <span class="marca">Estrella de Mar</span>
             </li>
           </ul>
         </li>
@@ -198,7 +199,7 @@
         <h2 class="titulo subrayado">Lenguaje Dual</h2>
         <p class="apertura" style="margin-top:20px">La capacidad de pensar simultáneamente en términos operacionales y financieros.</p>
         <p class="cuerpo">No es una habilidad que se estudia en un programa. Se desarrolla trabajando años en contextos donde no hay separación posible entre los dos mundos.</p>
-        <p class="cuerpo" style="margin-bottom:0">El Sr. Loaiza dedicó 30 años a construirla — y hoy la transfiere a directivos que necesitan ese puente.</p>
+        <p class="cuerpo" style="margin-bottom:0">El Sr. Loaiza dedicó 30 años a construirla — y hoy la transfiere a directivos y propietarios que necesitan ese puente.</p>
       </div>
       <svg class="diagrama-dual" viewBox="0 0 420 220" role="img" aria-label="Operaciones y Finanzas se intersectan en el Lenguaje Dual">
         <circle cx="150" cy="110" r="108" fill="#25282A" fill-opacity=".1"/>
@@ -207,6 +208,51 @@
         <text class="dual-izq" x="104" y="114" fill="#25282A" text-anchor="middle">OPERACIONES</text>
         <text x="328" y="114" fill="#25282A" text-anchor="middle">FINANZAS</text>
       </svg>
+    </div>
+  </section>
+
+  <!-- FRASES Y FOTOS -->
+  <section class="seccion oscuro frases" aria-label="Frases de Alejandro Loaiza">
+    <div class="contenedor">
+      <div class="carrusel-fotos" aria-roledescription="carrusel" aria-label="Fotos de la trayectoria">
+        <ul class="carrusel-pista">
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.42%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.43%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.43%20AM%20(2).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.43%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.44%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.44%20AM%20(2).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.44%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.45%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.45%20AM%20(2).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.45%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.46%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.46%20AM%20(2).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.46%20AM%20(3).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.46%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.47%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.47%20AM%20(2).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.47%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.48%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.48%20AM%20(2).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.48%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.49%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.49%20AM%20(3).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.49%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.50%20AM%20(1).webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.50%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+          <li class="slide"><img src="img/fotos-carousel/WhatsApp%20Image%202026-11-05%20at%208.05.51%20AM.webp" alt="Alejandro Loaiza en su trayectoria hotelera" loading="lazy"></li>
+        </ul>
+        <button class="carrusel-flecha anterior" type="button" aria-label="Fotos anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="carrusel-flecha siguiente" type="button" aria-label="Fotos siguientes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="carrusel-puntos" role="group" aria-label="Elegir fotos"></div>
+      <div class="frases-grid">
+        <blockquote class="frase">“Los números son crudos y deben analizarse sin sentimientos.”</blockquote>
+        <blockquote class="frase">“Los números te dicen qué es posible. Tu responsabilidad como líder es decidir qué es correcto.”</blockquote>
+        <blockquote class="frase">“Los mejores operadores deben ser también los mejores estrategas financieros.”</blockquote>
+      </div>
+      <p class="firma">Alejandro Loaiza · Estratega Hotelero</p>
     </div>
   </section>
 
@@ -238,6 +284,7 @@
           <a href="https://instagram.com/elestrategahotelero" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
           <a data-linkedin href="#" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
           <a href="https://tiktok.com/@elestrategahotelero" target="_blank" rel="noopener" aria-label="TikTok"><svg><use href="#i-tt"/></svg></a>
+          <a href="https://youtube.com/@elestrategahotelero" target="_blank" rel="noopener" aria-label="YouTube"><svg><use href="#i-yt"/></svg></a>
           <a data-wa="general" href="#" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
         </div>
       </div>
