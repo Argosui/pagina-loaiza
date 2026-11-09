@@ -39,11 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (WHATSAPP_NUMERO) el.textContent = "+" + WHATSAPP_NUMERO;
   });
 
-  // Header sólido al hacer scroll
+  // Header: se esconde al bajar y reaparece al subir
   const header = document.querySelector(".header");
-  const alScroll = () => header.classList.toggle("solido", window.scrollY > 40);
-  alScroll();
+  let yPrevia = window.scrollY;
+  const alScroll = () => {
+    const y = Math.max(window.scrollY, 0);
+    const delta = y - yPrevia;
+    if (Math.abs(delta) < 6) return; // ignora micro-movimientos
+    const bajando = delta > 0 && y > header.offsetHeight;
+    header.classList.toggle("escondido", bajando);
+    yPrevia = y;
+  };
   window.addEventListener("scroll", alScroll, { passive: true });
+  // Si el foco del teclado entra al header, se muestra
+  header.addEventListener("focusin", () => header.classList.remove("escondido"));
 
   // Menú móvil
   const toggle = document.querySelector(".menu-toggle");
@@ -91,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(paso);
   }
 
-  // Carrusel de fotos (Sobre mí): avanza solo cada 5 s, con flechas y puntos.
+  // Carrusel de fotos (Sobre mí): avanza solo cada 3.5 s, con flechas y puntos.
   // Muestra 3 fotos por vista en escritorio y 1 en móvil (lo define el CSS).
   const carrusel = document.querySelector(".carrusel-fotos");
   if (carrusel) {
@@ -123,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reiniciar = () => {
       clearInterval(temporizador);
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      temporizador = setInterval(() => mostrar(actual + 1), 5000);
+      temporizador = setInterval(() => mostrar(actual + 1), 3500);
     };
 
     carrusel.querySelector(".anterior").addEventListener("click", () => { mostrar(actual - 1); reiniciar(); });
@@ -175,8 +184,8 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (ev) => {
       ev.preventDefault();
       let valido = true;
-      form.querySelectorAll("input, textarea").forEach((campo) => {
-        campo.value = campo.value.trim();
+      form.querySelectorAll("input, textarea, select").forEach((campo) => {
+        if (campo.matches("input:not([type=checkbox]), textarea")) campo.value = campo.value.trim();
         const ok = campo.checkValidity();
         campo.setAttribute("aria-invalid", ok ? "false" : "true");
         if (!ok && valido) { campo.focus(); valido = false; }
@@ -186,8 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const d = Object.fromEntries(new FormData(form));
       const texto =
         `Hola Sr. Loaiza, conversemos.\n\n` +
-        `Nombre: ${d.nombre}\nEmpresa: ${d.empresa}\nCorreo: ${d.correo}\nCelular: ${d.celular}\n\n` +
-        `¿Qué deseo resolver en mi hotel?\n${d.mensaje}`;
+        `Nombre: ${d.nombre}\nCorreo: ${d.correo}\nCargo: ${d.cargo}\nHotel / empresa: ${d.hotel}\n` +
+        `País o región: ${d.pais}\n` +
+        (d.habitaciones ? `Habitaciones: ${d.habitaciones}\n` : "") +
+        `Servicio de interés: ${d.servicio}\n` +
+        (d.inicio ? `¿Cuándo empezar?: ${d.inicio}\n` : "") +
+        `\n¿Qué situación me preocupa más?\n${d.mensaje}`;
       window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
     });
   }

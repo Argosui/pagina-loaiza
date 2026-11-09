@@ -12,7 +12,7 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:wght@400;500;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -32,11 +32,7 @@
 
 <header class="header">
   <div class="contenedor">
-    <a href="index.html" class="isologo" aria-label="Loaiza · Estratega Hotelero — Inicio">
-      <svg class="iso"><use href="#iso"/></svg>
-      <span class="divisor"></span>
-      <span><span class="nombre">LOAIZA</span><span class="descriptor">ESTRATEGA HOTELERO</span></span>
-    </a>
+    <a href="index.html" class="isologo" aria-label="Loaiza · Estratega Hotelero — Inicio"><img class="logo" src="img/loaiza-logo-nav.webp" alt="" width="1000" height="251"></a>
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav" aria-label="Principal">
       <a href="index.html">Inicio</a>
@@ -62,31 +58,76 @@
       </figure>
       <div>
         <h1 class="titulo subrayado">Conversemos</h1>
-        <p class="subtitulo">Resolvamos juntos ese reto que tienes en tu hotel.</p>
+        <p class="subtitulo">¿Dónde le duele a tu hotel?</p>
+        <p class="form-intro">Cuéntame qué está pasando. Podemos explorar juntos si necesitas revisar costos, ingresos o el funcionamiento integral de tu operación.</p>
         <form class="formulario" data-form-contacto novalidate>
-          <div class="campo">
-            <label for="f-nombre">Nombre y apellido</label>
-            <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+          <div class="campos-2">
+            <div class="campo">
+              <label for="f-nombre">Nombre y apellido <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+            </div>
+            <div class="campo">
+              <label for="f-correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-correo" name="correo" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <div class="campo">
+              <label for="f-cargo">Cargo o relación con el hotel <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-cargo" name="cargo" type="text" autocomplete="organization-title" placeholder="Propietario, director, inversor…" required>
+            </div>
+            <div class="campo">
+              <label for="f-hotel">Hotel / empresa <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-hotel" name="hotel" type="text" autocomplete="organization" required>
+            </div>
+            <div class="campo">
+              <label for="f-pais">País o región <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-pais" name="pais" type="text" autocomplete="country-name" required>
+            </div>
+            <div class="campo">
+              <label for="f-habitaciones">Habitaciones aproximadas</label>
+              <input id="f-habitaciones" name="habitaciones" type="number" min="1" inputmode="numeric">
+            </div>
+            <div class="campo">
+              <label for="f-servicio">¿Qué servicio te interesa? <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-servicio" name="servicio" required>
+                <option value="" selected disabled>Selecciona una opción</option>
+                <option>El Costo Oculto</option>
+                <option>Análisis de Ingresos y Rentabilidad</option>
+                <option>Diagnóstico del Ciclo Completo</option>
+                <option>Necesito orientación</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="f-inicio">¿Cuándo te gustaría empezar?</label>
+              <select id="f-inicio" name="inicio">
+                <option value="" selected>Selecciona una opción</option>
+                <option>Lo antes posible</option>
+                <option>En el próximo mes</option>
+                <option>En 1 a 3 meses</option>
+                <option>Solo estoy explorando</option>
+              </select>
+            </div>
           </div>
           <div class="campo">
-            <label for="f-empresa">Nombre de la empresa</label>
-            <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required>
+            <label for="f-mensaje">¿Qué situación te preocupa más? <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="f-mensaje" name="mensaje" rows="4" required></textarea>
           </div>
-          <div class="campo">
-            <label for="f-correo">Correo</label>
-            <input id="f-correo" name="correo" type="email" autocomplete="email" inputmode="email" required>
-          </div>
-          <div class="campo">
-            <label for="f-celular">Celular</label>
-            <input id="f-celular" name="celular" type="tel" autocomplete="tel" inputmode="tel" required>
-          </div>
-          <div class="campo">
-            <label for="f-mensaje">¿Qué deseas resolver en tu hotel?</label>
-            <textarea id="f-mensaje" name="mensaje" rows="5" required></textarea>
-          </div>
-          <p class="form-error" role="alert" hidden>Por favor completa todos los campos con un correo válido.</p>
+          <label class="consentimiento">
+            <input type="checkbox" name="acepto" required>
+            <span>Acepto que estos datos se utilicen para responder mi solicitud, sujeto al aviso de privacidad vigente.</span>
+          </label>
+          <p class="form-error" role="alert" hidden>Por favor completa los campos obligatorios (*) con un correo válido y acepta el uso de tus datos.</p>
           <button type="submit" class="btn">Enviar</button>
         </form>
+
+        <div class="despues">
+          <h2>¿Qué sucede después?</h2>
+          <ol>
+            <li>Me cuentas tu principal desafío.</li>
+            <li>Reviso si existe encaje con lo que hago.</li>
+            <li>Te propongo una conversación exploratoria de 15–20 minutos.</li>
+            <li>Si procede, te presento una propuesta con alcance y honorarios.</li>
+          </ol>
+        </div>
       </div>
     </div>
   </section>
@@ -97,11 +138,7 @@
   <div class="contenedor">
     <div class="grid">
       <div>
-        <a href="index.html" class="isologo" aria-label="Loaiza · Estratega Hotelero">
-          <svg class="iso"><use href="#iso"/></svg>
-          <span class="divisor"></span>
-          <span><span class="nombre">LOAIZA</span><span class="descriptor">ESTRATEGA HOTELERO</span></span>
-        </a>
+        <a href="index.html" class="isologo" aria-label="Loaiza · Estratega Hotelero"><img class="logo" src="img/loaiza-logo-nav.webp" alt="" width="1000" height="251"></a>
         <p class="lema">“La hotelería no solo se opera: se dirige con estrategia.”</p>
       </div>
       <div>
