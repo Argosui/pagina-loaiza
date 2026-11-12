@@ -102,15 +102,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Carrusel de fotos (Sobre mí): avanza solo cada 3.5 s, con flechas y puntos.
   // Muestra 3 fotos por vista en escritorio y 1 en móvil (lo define el CSS).
+  // Es infinito: se clona el juego de fotos antes y después, y al terminar cada
+  // transición se salta sin animación a la foto real equivalente.
   const carrusel = document.querySelector(".carrusel-fotos");
   if (carrusel) {
     const pista = carrusel.querySelector(".carrusel-pista");
     const slides = [...pista.children];
+    const n = slides.length;
+    const clonar = (s) => { const c = s.cloneNode(true); c.setAttribute("aria-hidden", "true"); return c; };
+    pista.prepend(...slides.map(clonar));
+    pista.append(...slides.map(clonar));
+    const todas = [...pista.children];
     const contPuntos = document.querySelector(".carrusel-puntos");
-    let actual = 0;
+    const sinMovimiento = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let pos = 0; // índice de la primera foto visible dentro del juego real (0..n-1)
     let temporizador;
     const porVista = () => Math.max(1, Math.round(pista.clientWidth / slides[0].getBoundingClientRect().width));
-    const paginas = () => Math.ceil(slides.length / porVista());
+    const paginas = () => Math.ceil(n / porVista());
 
     const pintarPuntos = () => {
       contPuntos.innerHTML = "";
@@ -118,25 +126,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const b = document.createElement("button");
         b.type = "button";
         b.setAttribute("aria-label", `Ir al grupo de fotos ${i + 1}`);
-        b.addEventListener("click", () => { mostrar(i); reiniciar(); });
+        b.addEventListener("click", () => { mover(i * porVista()); reiniciar(); });
         contPuntos.appendChild(b);
       }
     };
-    const mostrar = (i) => {
-      const total = paginas();
-      actual = (i + total) % total;
-      const primera = Math.min(actual * porVista(), slides.length - porVista());
-      pista.style.transform = `translateX(${-slides[primera].offsetLeft}px)`;
-      [...contPuntos.children].forEach((p, j) => p.setAttribute("aria-current", j === actual));
+    const pintar = (animar) => {
+      pista.style.transition = animar ? "" : "none";
+      pista.style.transform = `translateX(${-todas[n + pos].offsetLeft}px)`;
+      if (!animar) void pista.offsetWidth; // aplica el salto antes de reactivar la transición
+      const pagina = Math.min(Math.floor((((pos % n) + n) % n) / porVista()), paginas() - 1);
+      [...contPuntos.children].forEach((p, j) => p.setAttribute("aria-current", j === pagina));
     };
+    const normalizar = () => {
+      if (pos >= 0 && pos < n) return;
+      pos = ((pos % n) + n) % n;
+      pintar(false);
+    };
+    const mover = (nuevo) => {
+      normalizar();
+      pos = nuevo;
+      pintar(true);
+      if (sinMovimiento()) normalizar();
+    };
+    pista.addEventListener("transitionend", (e) => { if (e.target === pista) normalizar(); });
     const reiniciar = () => {
       clearInterval(temporizador);
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      temporizador = setInterval(() => mostrar(actual + 1), 3500);
+      if (sinMovimiento()) return;
+      temporizador = setInterval(() => mover(pos + porVista()), 3500);
     };
 
-    carrusel.querySelector(".anterior").addEventListener("click", () => { mostrar(actual - 1); reiniciar(); });
-    carrusel.querySelector(".siguiente").addEventListener("click", () => { mostrar(actual + 1); reiniciar(); });
+    carrusel.querySelector(".anterior").addEventListener("click", () => { mover(pos - porVista()); reiniciar(); });
+    carrusel.querySelector(".siguiente").addEventListener("click", () => { mover(pos + porVista()); reiniciar(); });
     carrusel.addEventListener("mouseenter", () => clearInterval(temporizador));
     carrusel.addEventListener("mouseleave", reiniciar);
 
@@ -146,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pista.addEventListener("touchend", (e) => {
       if (x0 === null) return;
       const dx = e.changedTouches[0].clientX - x0;
-      if (Math.abs(dx) > 40) { mostrar(actual + (dx < 0 ? 1 : -1)); reiniciar(); }
+      if (Math.abs(dx) > 40) { mover(pos + (dx < 0 ? 1 : -1) * porVista()); reiniciar(); }
       x0 = null;
     });
 
@@ -155,11 +175,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth === ancho) return;
       ancho = window.innerWidth;
       pintarPuntos();
-      mostrar(Math.min(actual, paginas() - 1));
+      normalizar();
+      pintar(false);
     });
 
     pintarPuntos();
-    mostrar(0);
+    pintar(false);
     reiniciar();
   }
 
@@ -177,10 +198,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", marcar, { passive: true });
   }
 
-  // Formulario "Conversemos": valida y abre WhatsApp con los datos escritos
+  // Formulario "Conversemos": valida y muestra el mensaje de gracias en lugar del formulario
   const form = document.querySelector("[data-form-contacto]");
   if (form) {
     const aviso = form.querySelector(".form-error");
+    const gracias = document.querySelector(".form-gracias");
     form.addEventListener("submit", (ev) => {
       ev.preventDefault();
       let valido = true;
@@ -192,16 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       aviso.hidden = valido;
       if (!valido) return;
-      const d = Object.fromEntries(new FormData(form));
-      const texto =
-        `Hola Sr. Loaiza, conversemos.\n\n` +
-        `Nombre: ${d.nombre}\nCorreo: ${d.correo}\nCargo: ${d.cargo}\nHotel / empresa: ${d.hotel}\n` +
-        `País o región: ${d.pais}\n` +
-        (d.habitaciones ? `Habitaciones: ${d.habitaciones}\n` : "") +
-        `Servicio de interés: ${d.servicio}\n` +
-        (d.inicio ? `¿Cuándo empezar?: ${d.inicio}\n` : "") +
-        `\n¿Qué situación me preocupa más?\n${d.mensaje}`;
-      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
+      form.reset();
+      form.hidden = true;
+      gracias.hidden = false;
+      gracias.focus({ preventScroll: true });
+      gracias.scrollIntoView({ behavior: "smooth", block: "center" });
     });
   }
 

@@ -325,6 +325,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   padding: calc(var(--header-h) + 12px) 0 120px;
 }
 .hero--interna { min-height: min(78svh, 620px); padding-bottom: 48px; }
+/* Sobre mí: hero a pantalla completa */
+.hero--frase { min-height: 100vh; min-height: 100svh; }
 
 /* Foto del hero: ocupa toda la altura de la sección y conserva su proporción (no se recorta),
    fundida con el carbón hacia el texto y hacia arriba */
@@ -866,6 +868,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
   text-wrap: balance;
 }
 .reto-cta-texto em { font-style: normal; color: var(--cobre-claro); }
+/* Dos líneas fijas en escritorio; en pantallas angostas cada línea puede partirse */
+.reto-cta-texto:has(.linea) { max-width: none; }
+.reto-cta-texto .linea { display: block; }
 .reto-cta .btn { margin-top: clamp(22px, 2.6vw, 30px); }
 
 /* ---------- Lo que instala ---------- */
@@ -1153,8 +1158,11 @@ body::after {
     width: 50%;
     object-fit: cover;
     object-position: 70% center;
-    -webkit-mask-image: none;
-    mask-image: none;
+    /* Difuminado del borde izquierdo de la foto hacia el fondo carbón del título */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 35%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 35%);
+    -webkit-mask-composite: source-over;
+    mask-composite: add;
     filter: none;
   }
 }
@@ -1244,6 +1252,19 @@ body::after {
 .carrusel-fotos { padding-bottom: 24px; margin-bottom: -24px; }
 
 /* ---------- Formulario ---------- */
+
+.formulario[hidden], .form-gracias[hidden] { display: none; }
+.form-gracias {
+  margin-top: 28px;
+  padding: clamp(24px, 3vw, 36px);
+  border-left: 4px solid var(--cobre);
+  background: var(--marfil);
+  color: var(--carbon);
+  box-shadow: var(--sombra);
+  outline: none;
+}
+.form-gracias h2 { margin: 0 0 10px; font-family: var(--f-marca); font-size: clamp(22px, 2.4vw, 30px); text-transform: uppercase; letter-spacing: .05em; }
+.form-gracias p { margin: 0; max-width: 46ch; }
 
 .campo input, .campo textarea, .campo select {
   background: linear-gradient(180deg, #2A2E30, var(--carbon-2));
