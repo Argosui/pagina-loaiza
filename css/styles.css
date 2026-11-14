@@ -979,10 +979,10 @@ h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 .consentimiento input[aria-invalid="true"] { outline: 2px solid #E07A5F; outline-offset: 2px; }
 .despues { margin-top: clamp(32px, 4vw, 48px); padding-top: clamp(24px, 3vw, 32px); border-top: 1px solid var(--linea-oscura); }
 .despues h2 { font-family: var(--f-marca); font-weight: 600; font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--cobre-claro); margin: 0 0 16px; }
-.despues ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: paso; }
+.despues ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: paso; }
 .despues li { counter-increment: paso; font-size: 14.5px; line-height: 1.5; color: var(--marfil-suave); }
 .despues li::before { content: counter(paso); display: block; font-family: var(--f-marca); font-weight: 700; font-size: 28px; line-height: 1; color: var(--cobre); margin-bottom: 8px; }
-@media (max-width: 760px) { .despues ol { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) { .despues ol { grid-template-columns: 1fr; } }
 .campo [aria-invalid="true"] { border-bottom-color: #E07A5F; }
 .formulario .btn { justify-self: start; }
 .form-error { margin: 0; color: #F0A58F; font-size: 14.5px; }
